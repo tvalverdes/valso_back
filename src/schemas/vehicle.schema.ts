@@ -18,7 +18,7 @@ const vehicleFormSchema = new Schema<VehicleForm>({
       fabricationYear: { type: Number, required: true },
       vehicleType: { type: String, required: true },
       comment: { type: String },
-      vehicleImage: { type: String }
+      vehicleImage: { type: Buffer }
     }
   }
 })

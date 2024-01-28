@@ -1,13 +1,17 @@
 import { Request, Response } from 'express'
-import { VehicleForm } from '../types/types'
+import { vehicleRecords } from '../schemas/vehicle.schema'
 
 
 export const createVehicleForm = async (req: Request, res: Response) => {
   try {
-    const data = req.body as VehicleForm
-    console.log(data)
-    /* const result = await vehicleRecords.create(data)
-    res.send(result) */
+    const rawData = req.body.data
+    const data = JSON.parse(rawData)
+    const imageBuffer = req.file?.buffer
+    if (data.vehicleData && imageBuffer) {
+      data.vehicleData.vehicleImage = imageBuffer
+    }
+    await vehicleRecords.create({ data })
+    res.status(201).send({ message: 'Registrado exitosamente' })
 
   } catch (err) {
     console.log(err)
