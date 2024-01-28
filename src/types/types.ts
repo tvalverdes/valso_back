@@ -21,5 +21,5 @@ export type VehicleData = {
   fabricationYear: number
   vehicleType: string
   comment?: string
-  vehicleImage?: File
+  vehicleImage?: Buffer
 }

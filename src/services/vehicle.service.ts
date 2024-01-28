@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { vehicleRecords } from '../schemas/vehicle.schema'
+import { sendMail } from '../utils/email'
 
 
 export const createVehicleForm = async (req: Request, res: Response) => {
@@ -10,8 +10,9 @@ export const createVehicleForm = async (req: Request, res: Response) => {
     if (data.vehicleData && imageBuffer) {
       data.vehicleData.vehicleImage = imageBuffer
     }
-    await vehicleRecords.create({ data })
-    res.status(201).send({ message: 'Registrado exitosamente' })
+    sendMail({ data })
+    /* await vehicleRecords.create( data )
+    res.status(201).send({ message: 'Registrado exitosamente' }) */
 
   } catch (err) {
     console.log(err)
